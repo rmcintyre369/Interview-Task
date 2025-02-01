@@ -1,0 +1,10 @@
+The created csv should include the following books with the updated price as:
+The LEGO Ideas Book: New Edition, 20.39
+The Complete Gardener's Manual: The Essential Guide to Growing Vegetables, Fruits, Flowers, and Herbs, 42.00
+The Movie Book, 30.00
+Knowledge Encyclopedia, 36.00
+LEGO Star Wars: The Visual Dictionary, 29.99
+The Wonders of Nature, 30.00
+LEGO Harry Potter: Magical Treasury, 23.99
+The LEGO Technic Idea Book: Simple Machines, 17.99
+The Football Book, 23.99
