@@ -1,3 +1,4 @@
+
 import requests
 import csv
 from requests.exceptions import RequestException
@@ -96,4 +97,3 @@ if __name__ == "__main__":
     filtered_year_books = book_year_filter(filtered_category_books, year)
     changed_books = price_changer(filtered_year_books, price_factor)
     csv_writer(changed_books, output_file)
-

@@ -45,4 +45,3 @@ if __name__ == "__main__":
     sorted_json = SortJSON(json_data, SORT_CATEGORY)
     sorted_json_with_url = addField(sorted_json, URL)
     json_writer(sorted_json_with_url, OUTPUT_FILE)
-
