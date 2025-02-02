@@ -1,0 +1,819 @@
+{
+    "name": "Integration HTTP",
+    "flow": [
+        {
+            "id": 6,
+            "module": "http:ActionSendDataBasicAuth",
+            "version": 3,
+            "parameters": {
+                "key": 57978,
+                "handleErrors": false
+            },
+            "mapper": {
+                "ca": "",
+                "qs": [],
+                "url": "https://raw.githubusercontent.com/dk-books/tech-interview/refs/heads/main/ae/books.json",
+                "gzip": true,
+                "method": "get",
+                "headers": [],
+                "timeout": "",
+                "useMtls": false,
+                "bodyType": "",
+                "serializeUrl": false,
+                "shareCookies": false,
+                "parseResponse": false,
+                "followRedirect": true,
+                "useQuerystring": false,
+                "followAllRedirects": false,
+                "rejectUnauthorized": true
+            },
+            "metadata": {
+                "designer": {
+                    "x": -2978,
+                    "y": -302
+                },
+                "restore": {
+                    "expect": {
+                        "qs": {
+                            "mode": "chose"
+                        },
+                        "method": {
+                            "mode": "chose",
+                            "label": "GET"
+                        },
+                        "headers": {
+                            "mode": "chose"
+                        },
+                        "bodyType": {
+                            "label": "Empty"
+                        }
+                    },
+                    "parameters": {
+                        "key": {
+                            "label": "My HTTP Basic Auth key"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "key",
+                        "type": "keychain:basicauth",
+                        "label": "Credentials",
+                        "required": true
+                    },
+                    {
+                        "name": "handleErrors",
+                        "type": "boolean",
+                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "url",
+                        "type": "url",
+                        "label": "URL",
+                        "required": true
+                    },
+                    {
+                        "name": "serializeUrl",
+                        "type": "boolean",
+                        "label": "Serialize URL",
+                        "required": true
+                    },
+                    {
+                        "name": "method",
+                        "type": "select",
+                        "label": "Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "get",
+                                "head",
+                                "post",
+                                "put",
+                                "patch",
+                                "delete",
+                                "options"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "headers",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "Name",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Headers"
+                    },
+                    {
+                        "name": "qs",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "Name",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Query String"
+                    },
+                    {
+                        "name": "bodyType",
+                        "type": "select",
+                        "label": "Body type",
+                        "validate": {
+                            "enum": [
+                                "raw",
+                                "x_www_form_urlencoded",
+                                "multipart_form_data"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "parseResponse",
+                        "type": "boolean",
+                        "label": "Parse response",
+                        "required": true
+                    },
+                    {
+                        "name": "timeout",
+                        "type": "uinteger",
+                        "label": "Timeout",
+                        "validate": {
+                            "max": 300,
+                            "min": 1
+                        }
+                    },
+                    {
+                        "name": "shareCookies",
+                        "type": "boolean",
+                        "label": "Share cookies with other HTTP modules",
+                        "required": true
+                    },
+                    {
+                        "name": "ca",
+                        "type": "cert",
+                        "label": "Self-signed certificate"
+                    },
+                    {
+                        "name": "rejectUnauthorized",
+                        "type": "boolean",
+                        "label": "Reject connections that are using unverified (self-signed) certificates",
+                        "required": true
+                    },
+                    {
+                        "name": "followRedirect",
+                        "type": "boolean",
+                        "label": "Follow redirect",
+                        "required": true
+                    },
+                    {
+                        "name": "useQuerystring",
+                        "type": "boolean",
+                        "label": "Disable serialization of multiple same query string keys as arrays",
+                        "required": true
+                    },
+                    {
+                        "name": "gzip",
+                        "type": "boolean",
+                        "label": "Request compressed content",
+                        "required": true
+                    },
+                    {
+                        "name": "useMtls",
+                        "type": "boolean",
+                        "label": "Use Mutual TLS",
+                        "required": true
+                    },
+                    {
+                        "name": "followAllRedirects",
+                        "type": "boolean",
+                        "label": "Follow all redirect",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 10,
+            "module": "json:ParseJSON",
+            "version": 1,
+            "parameters": {
+                "type": 189044
+            },
+            "mapper": {
+                "json": "{{6.data}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": -2690,
+                    "y": -304
+                },
+                "restore": {
+                    "parameters": {
+                        "type": {
+                            "label": "My data structure"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "type",
+                        "type": "udt",
+                        "label": "Data structure"
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "json",
+                        "type": "text",
+                        "label": "JSON string",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "title",
+                        "type": "text",
+                        "label": "Title",
+                        "default": null,
+                        "required": true,
+                        "multiline": false
+                    },
+                    {
+                        "name": "isbn",
+                        "type": "number",
+                        "label": "Isbn",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "name": "price",
+                        "type": "number",
+                        "label": "Price",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "name": "description",
+                        "type": "text",
+                        "label": "Description",
+                        "default": null,
+                        "required": true,
+                        "multiline": false
+                    },
+                    {
+                        "name": "author",
+                        "type": "text",
+                        "label": "Author",
+                        "default": null,
+                        "required": true,
+                        "multiline": false
+                    },
+                    {
+                        "name": "publisher",
+                        "type": "text",
+                        "label": "Publisher",
+                        "default": null,
+                        "required": true,
+                        "multiline": false
+                    },
+                    {
+                        "name": "publication_date",
+                        "type": "date",
+                        "label": "Publication Date",
+                        "required": true
+                    },
+                    {
+                        "name": "pages",
+                        "type": "number",
+                        "label": "Pages",
+                        "default": null,
+                        "required": true
+                    },
+                    {
+                        "name": "format",
+                        "type": "text",
+                        "label": "Format",
+                        "default": null,
+                        "required": true,
+                        "multiline": false
+                    },
+                    {
+                        "name": "categories",
+                        "type": "text",
+                        "label": "Categories",
+                        "default": null,
+                        "required": true,
+                        "multiline": false
+                    },
+                    {
+                        "name": "image_url",
+                        "type": "text",
+                        "label": "Image Url",
+                        "default": null,
+                        "required": true,
+                        "multiline": false
+                    }
+                ]
+            }
+        },
+        {
+            "id": 22,
+            "module": "math:EvaluateExpression",
+            "version": 1,
+            "parameters": {},
+            "filter": {
+                "name": "Correct Categories",
+                "conditions": [
+                    [
+                        {
+                            "a": "{{10.categories}}",
+                            "b": "Hobbies",
+                            "o": "text:contain"
+                        },
+                        {
+                            "a": "{{10.publication_date}}",
+                            "b": "2020-01-01",
+                            "o": "date:greaterorequal"
+                        }
+                    ],
+                    [
+                        {
+                            "a": "{{10.categories}}",
+                            "b": "Nonfiction",
+                            "o": "text:contain"
+                        },
+                        {
+                            "a": "{{10.publication_date}}",
+                            "b": "2020-01-01",
+                            "o": "date:greaterorequal"
+                        }
+                    ]
+                ]
+            },
+            "mapper": {
+                "expression": "{{formatNumber((10.price * 1.2); 2; \".\"; \",\")}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": -2356,
+                    "y": -301
+                },
+                "restore": {},
+                "expect": [
+                    {
+                        "name": "expression",
+                        "type": "text",
+                        "label": "Expression",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 23,
+            "module": "csv:CreateAdvancedAggregator",
+            "version": 1,
+            "parameters": {
+                "type": 189119,
+                "feeder": 10,
+                "newlineType": "LF",
+                "delimiterType": ",",
+                "includeHeaders": true
+            },
+            "mapper": {
+                "isbn": "{{10.isbn}}",
+                "pages": "{{10.pages}}",
+                "price": "{{22.result}}",
+                "title": "{{10.title}}",
+                "author": "{{10.author}}",
+                "format": "{{10.format}}",
+                "image_url": "{{10.image_url}}",
+                "publisher": "{{10.publisher}}",
+                "categories": "{{10.categories}}",
+                "description": "{{10.description}}",
+                "publication_date": "{{formatDate(10.publication_date; \"YYYY-MM-DD\")}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": -1944,
+                    "y": -307
+                },
+                "restore": {
+                    "extra": {
+                        "feeder": {
+                            "label": "JSON - Parse JSON [10]"
+                        }
+                    },
+                    "parameters": {
+                        "type": {
+                            "label": "CSV Structure"
+                        },
+                        "newlineType": {
+                            "label": "LF"
+                        },
+                        "delimiterType": {
+                            "label": "Comma"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "type",
+                        "type": "udt",
+                        "label": "Data structure",
+                        "required": true
+                    },
+                    {
+                        "name": "includeHeaders",
+                        "type": "boolean",
+                        "label": "Include headers in the first row",
+                        "required": true
+                    },
+                    {
+                        "name": "delimiterType",
+                        "type": "select",
+                        "label": "Delimiter",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                ",",
+                                "\t",
+                                "other"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "newlineType",
+                        "type": "select",
+                        "label": "Newline",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "LF",
+                                "CRLF"
+                            ]
+                        }
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "title",
+                        "type": "text",
+                        "label": "Title",
+                        "required": true
+                    },
+                    {
+                        "name": "isbn",
+                        "type": "number",
+                        "label": "Isbn",
+                        "required": true
+                    },
+                    {
+                        "name": "price",
+                        "type": "number",
+                        "label": "Price",
+                        "required": true
+                    },
+                    {
+                        "name": "description",
+                        "type": "text",
+                        "label": "Description",
+                        "required": true
+                    },
+                    {
+                        "name": "author",
+                        "type": "text",
+                        "label": "Author",
+                        "required": true
+                    },
+                    {
+                        "name": "publisher",
+                        "type": "text",
+                        "label": "Publisher",
+                        "required": true
+                    },
+                    {
+                        "name": "publication_date",
+                        "type": "text",
+                        "label": "Publication Date",
+                        "required": true
+                    },
+                    {
+                        "name": "pages",
+                        "type": "number",
+                        "label": "Pages",
+                        "required": true
+                    },
+                    {
+                        "name": "format",
+                        "type": "text",
+                        "label": "Format",
+                        "required": true
+                    },
+                    {
+                        "name": "categories",
+                        "type": "text",
+                        "label": "Categories",
+                        "required": true
+                    },
+                    {
+                        "name": "image_url",
+                        "type": "text",
+                        "label": "Image Url",
+                        "required": true
+                    }
+                ],
+                "advanced": true
+            }
+        },
+        {
+            "id": 9,
+            "module": "email:ActionSendEmail",
+            "version": 7,
+            "parameters": {
+                "account": 5288612,
+                "saveAfterSent": false
+            },
+            "mapper": {
+                "cc": [],
+                "to": [
+                    "r.mcintyre369@gmail.com"
+                ],
+                "bcc": [],
+                "from": "",
+                "html": "",
+                "sender": "",
+                "headers": [],
+                "replyTo": "",
+                "subject": "CSV for task2 for DK",
+                "priority": "normal",
+                "inReplyTo": "",
+                "references": [],
+                "attachments": [
+                    {
+                        "cid": "",
+                        "data": "{{23.text}}",
+                        "fileName": "task2.csv"
+                    }
+                ],
+                "contentType": "html"
+            },
+            "metadata": {
+                "designer": {
+                    "x": -1613,
+                    "y": -311
+                },
+                "restore": {
+                    "expect": {
+                        "cc": {
+                            "mode": "chose"
+                        },
+                        "to": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        },
+                        "bcc": {
+                            "mode": "chose"
+                        },
+                        "priority": {
+                            "label": "Normal"
+                        },
+                        "references": {
+                            "mode": "chose"
+                        },
+                        "attachments": {
+                            "mode": "chose",
+                            "items": [
+                                null
+                            ]
+                        },
+                        "contentType": {
+                            "label": "HTML"
+                        }
+                    },
+                    "parameters": {
+                        "account": {
+                            "data": {
+                                "scoped": "true",
+                                "connection": "microsoft-smtp-imap"
+                            },
+                            "label": "My Google Restricted connection (r.mcintyre369@gmail.com)"
+                        },
+                        "saveAfterSent": {
+                            "label": "No"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "account",
+                        "type": "account:smtp,google-restricted,microsoft-smtp-imap",
+                        "label": "Connection",
+                        "required": true
+                    },
+                    {
+                        "name": "saveAfterSent",
+                        "type": "select",
+                        "label": "Save message after sending",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                true,
+                                false
+                            ]
+                        }
+                    },
+                    {
+                        "type": "hidden"
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "to",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address",
+                            "required": true
+                        },
+                        "type": "array",
+                        "label": "To",
+                        "required": true
+                    },
+                    {
+                        "name": "subject",
+                        "type": "text",
+                        "label": "Subject"
+                    },
+                    {
+                        "name": "contentType",
+                        "type": "select",
+                        "label": "Content Type",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "html",
+                                "text"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "attachments",
+                        "spec": [
+                            {
+                                "name": "fileName",
+                                "type": "filename",
+                                "label": "File name",
+                                "required": true,
+                                "semantic": "file:name"
+                            },
+                            {
+                                "name": "data",
+                                "type": "buffer",
+                                "label": "Data",
+                                "required": true,
+                                "semantic": "file:data"
+                            },
+                            {
+                                "name": "cid",
+                                "type": "text",
+                                "label": "Content-ID"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Attachments"
+                    },
+                    {
+                        "name": "cc",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address"
+                        },
+                        "type": "array",
+                        "label": "Copy recipient"
+                    },
+                    {
+                        "name": "bcc",
+                        "spec": {
+                            "name": "value",
+                            "type": "email",
+                            "label": "Email address"
+                        },
+                        "type": "array",
+                        "label": "Blind copy recipient"
+                    },
+                    {
+                        "name": "from",
+                        "type": "text",
+                        "label": "From"
+                    },
+                    {
+                        "name": "sender",
+                        "type": "text",
+                        "label": "Sender"
+                    },
+                    {
+                        "name": "replyTo",
+                        "type": "text",
+                        "label": "Reply-To"
+                    },
+                    {
+                        "name": "inReplyTo",
+                        "type": "text",
+                        "label": "In-Reply-To"
+                    },
+                    {
+                        "name": "references",
+                        "spec": {
+                            "name": "value",
+                            "type": "text",
+                            "label": "Reference",
+                            "required": true
+                        },
+                        "type": "array",
+                        "label": "References"
+                    },
+                    {
+                        "name": "priority",
+                        "type": "select",
+                        "label": "Priority",
+                        "validate": {
+                            "enum": [
+                                "high",
+                                "normal",
+                                "low"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "headers",
+                        "spec": [
+                            {
+                                "name": "key",
+                                "type": "text",
+                                "label": "Key",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value",
+                                "required": true
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Headers"
+                    },
+                    {
+                        "name": "html",
+                        "type": "text",
+                        "label": "Content"
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": false,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "slots": null,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu2.make.com",
+        "notes": []
+    }
+}
