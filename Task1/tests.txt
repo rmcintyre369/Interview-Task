@@ -1,0 +1,6 @@
+This contains the test cases used for the program.
+
+allBooks - all books from the json file not changed
+allBooksPriceDoubled - all books from the json file with the price doubled
+filteredCategoryBooks - all books with the category "Cooking" or "Folklore" published after the year 2020 with the original price(should be only one book)
+
